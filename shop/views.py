@@ -1,11 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 
+
+#by default slug is taken as None
 def product_list(request, category_slug=None):
+    #if slug is not given in url
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
 
+    #if slug is given
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category)
@@ -18,12 +22,12 @@ def product_list(request, category_slug=None):
 
     return render(request, 'shop/product/list.html', context)
 
+
+#To show the specific product using id and slug
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     context = {
         'product': product,
     }
 
-    return render(request, 'shop/product/detial.html', context)
-
-
+    return render(request, 'shop/product/detail.html', context)

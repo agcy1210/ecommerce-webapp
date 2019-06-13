@@ -18,6 +18,10 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:product_list_by_category', args=[self.slug])
+        #shop is used as we defined app name in urls.py, so it
+        #will call the particular url from given app by name
+        #this method is used to assign url name in templates
+        #which passed through object in views.py
 
 
 
