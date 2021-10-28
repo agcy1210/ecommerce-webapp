@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+#Categoty model
 class Category(models.Model):
     name = models.CharField(max_length=150, db_index=True)
     slug = models.SlugField(max_length=150, unique=True, db_index=True)
@@ -24,9 +25,9 @@ class Category(models.Model):
         #which passed through object in views.py
 
 
-
+#Product Model
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE) #Foreign Key
     name = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
     description = models.TextField(blank=True)
